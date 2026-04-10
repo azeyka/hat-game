@@ -4,11 +4,29 @@ import { Word } from "../entities/Word.js";
 
 export async function listPacks() {
   const repo = AppDataSource.getRepository(WordPack);
-  const packs = await repo.find({ order: { name: "ASC" } });
-  return packs.map((p) => ({
-    id: p.id,
-    name: p.name,
-    difficulty: p.difficulty
+  const rows = await repo
+    .createQueryBuilder("pack")
+    .leftJoin(Word, "word", "word.pack_id = pack.id")
+    .select("pack.id", "id")
+    .addSelect("pack.name", "name")
+    .addSelect("pack.difficulty", "difficulty")
+    .addSelect("COUNT(word.id)", "wordsCount")
+    .groupBy("pack.id")
+    .addGroupBy("pack.name")
+    .addGroupBy("pack.difficulty")
+    .orderBy("pack.name", "ASC")
+    .getRawMany<{
+      id: string;
+      name: string;
+      difficulty: string | number;
+      wordsCount: string | number;
+    }>();
+
+  return rows.map((row) => ({
+    id: row.id,
+    name: row.name,
+    difficulty: Number(row.difficulty),
+    wordsCount: Number(row.wordsCount),
   }));
 }
 
@@ -22,8 +40,9 @@ export async function createPackWithWords(params: {
 
   const pack = packRepo.create({
     name: params.name.trim(),
-    difficulty: params.difficulty
+    difficulty: params.difficulty,
   });
+
   await packRepo.save(pack);
 
   const uniqueWords = Array.from(
@@ -38,9 +57,15 @@ export async function createPackWithWords(params: {
   const entities = uniqueWords.map((t) =>
     wordRepo.create({ text: t, pack_id: pack.id })
   );
+
   await wordRepo.save(entities);
 
-  return { id: pack.id, name: pack.name, difficulty: pack.difficulty };
+  return {
+    id: pack.id,
+    name: pack.name,
+    difficulty: pack.difficulty,
+    wordsCount: uniqueWords.length,
+  };
 }
 
 export async function getRandomWordsFromPacks(params: {

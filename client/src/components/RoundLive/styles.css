@@ -23,6 +23,7 @@
     padding: 24px 10px;
     border: 1px dashed #000;
     border-radius: 16px;
+    user-select: none;
   }
   
   .pair {

@@ -4,6 +4,7 @@ import { RootState } from "../store/store";
 import { createWsClient, WsClient } from "../ws/wsClient";
 import { Game } from "../components/Game";
 import { Join } from "../components/Join";
+import { Header } from "../components/Header";
 
 export function App() {
   const room = useSelector((s: RootState) => s.game.room);
@@ -17,5 +18,8 @@ export function App() {
 
   if (!wsClient) return <div style={{ padding: 16 }}>Connecting...</div>;
 
-  return room ? <Game wsClient={wsClient} /> : <Join wsClient={wsClient} />;
+  return <div>
+    <Header wsClient={wsClient} />
+    {room ? <Game wsClient={wsClient} /> : <Join wsClient={wsClient} />};
+  </div>
 }

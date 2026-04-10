@@ -1,63 +1,65 @@
 import React, { useMemo } from "react";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import type { RoomState } from "../../store/gameSlice";
 import type { WsClient } from "../../ws/wsClient";
-import "./styles.css";
+import PodiumTop from "./PodiumTop";
+import PodiumTable from "./PodiumTable";
 
-export function Podium({
-  room,
-  wsClient,
-  playerId
-}: {
+type PodiumProps = {
   room: RoomState;
   wsClient: WsClient;
   playerId: string | null;
-}) {
+};
+
+export function Podium({ room, wsClient, playerId }: PodiumProps) {
   const me = useMemo(
     () => room.players.find((p) => p.id === playerId),
     [room.players, playerId]
   );
 
   const reset = () => {
-    wsClient.send({ type: "RESET_GAME", payload: { roomId: room.roomId } });
+    wsClient.send({
+      type: "RESET_GAME",
+      payload: { roomId: room.roomId },
+    });
   };
 
   return (
-    <div className="podium">
-      <div className="card">
-        <h2>Results</h2>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Stack spacing={3}>
+        <Box textAlign="center">
+          <Typography variant="h3" fontWeight={800} mb={1}>
+            Итоги игры
+          </Typography>
 
-        <table className="results-table">
-        <thead>
-            <tr>
-            <th>Игрок</th>
-            <th>Очки</th>
-            <th>Отгадано</th>
-            <th>Загадано</th>
-            <th>Пропущено</th>
-            </tr>
-        </thead>
+          <Typography variant="body1" color="text.secondary">
+            Комната: {room.roomId}
+          </Typography>
+        </Box>
 
-        <tbody>
-            {room.podium?.map((p) => (
-            <tr key={p.id}>
-                <td>{p.name}</td>
-                <td><b>{p.score}</b></td>
-                <td>{p.guessedCount}</td>
-                <td>{p.explainedCount}</td>
-                <td>{p.skippedCount}</td>
-            </tr>
-            ))}
-        </tbody>
-        </table>
+        {/* <PodiumTop players={room.podium ?? []} playerId={playerId} /> */}
 
-        {me?.isHost ? (
-          <button className="btn primary" onClick={reset} type="button">
-            Начать новую игру
-          </button>
-        ) : (
-          <div className="hint">Ждём, пока хост начнёт новую игру…</div>
-        )}
-      </div>
-    </div>
+        {/* <PodiumTable players={room.podium ?? []} playerId={playerId} /> */}
+
+        <Box textAlign="center">
+          {me?.isHost ? (
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<ReplayRoundedIcon />}
+              onClick={reset}
+              sx={{ minWidth: 240 }}
+            >
+              Начать новую игру
+            </Button>
+          ) : (
+            <Typography variant="body1" color="text.secondary">
+              Ждём, пока хост начнёт новую игру…
+            </Typography>
+          )}
+        </Box>
+      </Stack>
+    </Container>
   );
 }

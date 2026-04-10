@@ -31,6 +31,7 @@ export interface WordPack {
     id: string;
     name: string;
     difficulty: number;
+    wordsCount: number;
   }
   
 

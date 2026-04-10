@@ -40,6 +40,7 @@
   .packs {
     display: grid;
     gap: 8px;
+    margin: 12px 0 48px;
   }
   
   .pack {
@@ -78,11 +79,3 @@
     resize: vertical;
   }
   
-  .error-block {
-    margin-top: 10px;
-  }
-
-  .error {
-    color: red;
-    font-size: 12px;
-  }
