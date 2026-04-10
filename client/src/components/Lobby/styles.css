@@ -1,0 +1,80 @@
+.settings {
+    border-top: 1px dashed #000;
+    padding-top: 12px;
+    display: grid;
+    gap: 10px;
+  }
+  
+  .settings-grid {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .field {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  
+  .field input[type="number"] {
+    padding: 10px 12px;
+    border: 1px solid #000;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #fff;
+    color: #000;
+  }
+  
+  .field.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .field.checkbox input {
+    width: 18px;
+    height: 18px;
+  }
+  
+
+  .packs {
+    display: grid;
+    gap: 8px;
+  }
+  
+  .pack {
+    display: grid;
+    grid-template-columns: 18px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px dashed #000;
+    border-radius: 12px;
+  }
+  
+  .pack-name {
+    font-weight: 600;
+  }
+  
+  .pack-diff {
+    font-size: 12px;
+    color: #444;
+  }
+  
+  .create-pack {
+    display: grid;
+    gap: 10px;
+    border-top: 1px dashed #000;
+    padding-top: 12px;
+  }
+  
+  textarea {
+    padding: 10px 12px;
+    border: 1px solid #000;
+    border-radius: 12px;
+    font-size: 14px;
+    background: #fff;
+    color: #000;
+    resize: vertical;
+  }
+  

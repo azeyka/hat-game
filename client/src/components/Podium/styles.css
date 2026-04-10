@@ -1,0 +1,48 @@
+.btn {
+    border: 1px solid #000;
+    background: #fff;
+    color: #000;
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  
+  .btn.primary {
+    border: none;
+    background: var(--accent, #2f7cff);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .hint {
+    color: #444;
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  
+  .results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 14px;
+  }
+  
+  .results-table th,
+  .results-table td {
+    border-bottom: 1px dashed #000;
+    padding: 8px 6px;
+    text-align: center;
+  }
+  
+  .results-table th {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #333;
+  }
+  
+  .results-table td:first-child,
+  .results-table th:first-child {
+    text-align: left;
+  }
+  

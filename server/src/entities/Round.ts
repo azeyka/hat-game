@@ -1,0 +1,2 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+@Entity() export class Round { @PrimaryGeneratedColumn('uuid') id!: string; @Column() roomId!: string; @Column({ default: 0 }) currentWordIndex!: number; }

@@ -1,0 +1,2 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+@Entity() export class RoundWord { @PrimaryGeneratedColumn('uuid') id!: string; @Column() roundId!: string; @Column() wordId!: string; @Column({ default: false }) guessed!: boolean; @Column({ default: false }) skipped!: boolean; }

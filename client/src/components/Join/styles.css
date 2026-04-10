@@ -1,0 +1,42 @@
+.join {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    display: grid;
+    gap: 12px;
+  }
+  
+  .join h1 {
+    margin: 0 0 8px;
+  }
+  
+  .join label {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  
+  .join input {
+    padding: 12px 12px;
+    border: 1px solid #000;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #fff;
+    color: #000;
+  }
+  
+  .join button {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent, #2f7cff);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .hint {
+    color: #444;
+    font-size: 12px;
+  }
+  
